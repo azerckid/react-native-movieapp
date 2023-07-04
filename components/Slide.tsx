@@ -10,6 +10,7 @@ import styled from "styled-components/native";
 import { BlurView } from "expo-blur";
 import { makeImgPath } from "../utils";
 import Poster from "./Poster";
+import { Movie } from "../api";
 
 const BgImg = styled.Image``;
 
@@ -44,6 +45,7 @@ interface SlideProps {
   originalTitle: string;
   voteAverage: number;
   overview: string;
+  fullData: Movie;
 }
 
 const Slide: React.FC<SlideProps> = ({
@@ -52,11 +54,18 @@ const Slide: React.FC<SlideProps> = ({
   originalTitle,
   voteAverage,
   overview,
+  fullData,
 }) => {
   const isDark = useColorScheme() === "dark";
   const navigation = useNavigation();
   const goToDetail = () => {
-    navigation.navigate("Stack", { screen: "Detail" });
+    //@ts-ignore
+    navigation.navigate("Stack", {
+      screen: "Detail",
+      params: {
+        ...fullData,
+      },
+    });
   };
   return (
     <TouchableWithoutFeedback onPress={goToDetail}>

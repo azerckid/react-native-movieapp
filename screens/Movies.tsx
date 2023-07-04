@@ -29,6 +29,7 @@ const HSeparator = styled.View`
 const Movies: React.FC<NativeStackScreenProps<any, "Movies">> = () => {
   const queryClient = useQueryClient();
   const [refreshing, setRefreshing] = useState(false);
+
   const { isLoading: nowPlayingLoading, data: nowPlayingData } =
     useQuery<MovieResponse>(["movies", "nowPlaying"], moviesApi.nowPlaying);
   const { isLoading: upcomingLoading, data: upcomingData } =
@@ -73,6 +74,7 @@ const Movies: React.FC<NativeStackScreenProps<any, "Movies">> = () => {
                 originalTitle={movie.original_title}
                 voteAverage={movie.vote_average}
                 overview={movie.overview}
+                fullData={movie}
               />
             ))}
           </Swiper>
@@ -91,6 +93,7 @@ const Movies: React.FC<NativeStackScreenProps<any, "Movies">> = () => {
           originalTitle={item.original_title}
           overview={item.overview}
           releaseDate={item.release_date}
+          fullData={item}
         />
       )}
     />
