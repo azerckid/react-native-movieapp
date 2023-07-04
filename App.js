@@ -8,11 +8,14 @@ import { Asset, useAssets } from "expo-asset";
 
 import { NavigationContainer } from "@react-navigation/native";
 
+import { QueryClient, QueryClientProvider } from "react-query";
+
 import Root from "./navigation/Root";
 
 import { ThemeProvider } from "styled-components/native";
 import { darkTheme, lightTheme } from "./styled";
 
+const queryClient = new QueryClient();
 const loadFonts = (fonts) => fonts.map((font) => Font.loadAsync(font));
 
 const loadImages = (images) =>
@@ -52,11 +55,13 @@ export default function App() {
   if (ready) {
     SplashScreen.hideAsync();
     return (
-      <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
-        <NavigationContainer>
-          <Root />
-        </NavigationContainer>
-      </ThemeProvider>
+      <QueryClientProvider client={queryClient}>
+        <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
+          <NavigationContainer>
+            <Root />
+          </NavigationContainer>
+        </ThemeProvider>
+      </QueryClientProvider>
     );
   }
 }
