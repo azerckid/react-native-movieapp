@@ -1,14 +1,13 @@
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import React, { useState } from "react";
 import { useQuery, useQueryClient } from "react-query";
-import { ActivityIndicator, Dimensions, FlatList } from "react-native";
+import { Dimensions, FlatList } from "react-native";
 import styled from "styled-components/native";
 import Swiper from "react-native-swiper";
 import Loader from "../components/Loader";
 import Slide from "../components/Slide";
 import HList from "../components/HList";
 import HMedia from "../components/HMedia";
-import VMedia from "../components/VMedia";
 import { moviesApi, MovieResponse } from "../api";
 
 const { height: SCREEN_HEIGHT } = Dimensions.get("window");
